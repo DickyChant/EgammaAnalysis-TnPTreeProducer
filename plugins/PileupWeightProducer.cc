@@ -39,17 +39,15 @@ private:
   //virtual void endJob() ;
 
   edm::EDGetTokenT< std::vector<PileupSummaryInfo> > pileupInfoTag_;
-  std::vector<double> pileupMC_;
-  std::vector<double> pileupData_;
+
   std::vector<double> pileupWeights_;
 };
 
 PileupWeightProducer::PileupWeightProducer(const edm::ParameterSet& iConfig) {
 
-  pileupMC_   = iConfig.getParameter<std::vector<double> >("PileupMC");
-  pileupData_ = iConfig.getParameter<std::vector<double> >("PileupData");
-  pileupInfoTag_ = consumes<std::vector<PileupSummaryInfo> >(iConfig.getParameter<edm::InputTag>("pileupInfoTag"));
 
+  // pileupInfoTag_ = consumes<std::vector<PileupSummaryInfo> >(iConfig.getParameter<edm::InputTag>("pileupInfoTag"));
+  // change to centrality!
   unsigned int nbins = std::min(pileupData_.size(), pileupMC_.size());
   pileupData_.resize(nbins);
   pileupMC_.resize(nbins);
